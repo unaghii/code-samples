@@ -1,2 +1,2 @@
-# code-samples
-Code samples
+# Code amples
+Mostly PHP and WordPress code.
