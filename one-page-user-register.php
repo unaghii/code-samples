@@ -9,8 +9,8 @@
 */
 	global $theme_prefix;
 
-	if($_SERVER['REQUEST_METHOD'] == "POST"){
-		if(!email_exists($_POST['txt_email']) && !username_exists($_POST['txt_username'])){
+	if ( $_SERVER['REQUEST_METHOD'] == "POST" ) {
+		if( !email_exists( $_POST['txt_email'] ) && !username_exists( $_POST['txt_username'] ) ) {
 			$user_ID = wp_insert_user(array(
 				'user_login'		=> $_POST['txt_username'],
 				'user_pass'			=> $_POST['txt_password'],
@@ -20,19 +20,19 @@
 				'role'				=> 'pesquisas'
 			));
 
-			if(!is_wp_error($user_ID)){
-				update_user_option($user_ID, 'show_admin_bar_front', false);
+			if ( !is_wp_error( $user_ID ) ) {
+				update_user_option( $user_ID, 'show_admin_bar_front', false );
 
 				// Manually login user
-				wp_signon(array(
+				wp_signon( array (
 					'user_login'	=> $_POST['txt_username'],
 					'user_password'	=> $_POST['txt_password'],
 					'remember'		=> true
-				));
-				wp_set_auth_cookie($user_ID);
+				) );
+				wp_set_auth_cookie( $user_ID );
 
 				$page_referrer = $_POST['page_referrer'];
-				if(strpos($page_referrer, "<<EDITED>>.com") === false){
+				if ( strpos( $page_referrer, "<<EDITED>>.com" ) === false ){
 					$page_referrer = '/meu-perfil/';
 				}
 
@@ -95,7 +95,7 @@
 				$receiver 	= $_POST['txt_email'];
 				$subject	= "Novo cadastro no <<EDITED>>";
 				$headers 	= "From: <<EDITED>> <". $mailer .">\nContent-type: text/html; charset=utf-8";
-				wp_mail($receiver,$subject,$message,$headers);
+				wp_mail( $receiver, $subject, $message, $headers );
 			}
 		} else {
 			get_header();

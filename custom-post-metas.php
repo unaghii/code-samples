@@ -5,16 +5,23 @@
 *
 * Client: Music therapy website
 */
-function unaghii_get_meta_box($meta_boxes){
+function unaghii_get_meta_box ( $meta_boxes ) {
 
 	// Theme prefix
 	global $theme_prefix;
 
 	// Classes array
 	$classes_options = array();
-	$classes_array = get_posts(array("post_type" => "turmas", "orderby" => "title", "order" => "ASC", "posts_per_page" => -1));
-	if(!empty($classes_array)){
-		foreach($classes_array as $class){
+	$classes_array = get_posts (
+		array (
+			"post_type" 		=> "turmas",
+			"orderby" 			=> "title",
+			"order" 			=> "ASC",
+			"posts_per_page" 	=> -1
+		)
+	);
+	if ( !empty ( $classes_array ) ) {
+		foreach ( $classes_array as $class ) {
 			$classes_options[$class->ID] = $class->post_title;
 		}
 	}
@@ -174,4 +181,4 @@ function unaghii_get_meta_box($meta_boxes){
 
 	return $meta_boxes;
 }
-add_filter('rwmb_meta_boxes', 'unaghii_get_meta_box');
+add_filter( 'rwmb_meta_boxes', 'unaghii_get_meta_box' );
